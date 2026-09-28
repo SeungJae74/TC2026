@@ -81,8 +81,8 @@
 
 ///////////////////////////////////////////////////////////////////
 #heading(level: 1, numbering: none)[HW01 함수(function)와 관계(relation)의 항수(arity)]
-- 이름: 
-- 학번: 
+- 이름: 윤승재
+- 학번: 20232384
 #v(0.5em)
 #heading(level: 2, numbering: none)[주교재 Example 0.9]
 예제(Example)의 2항 함수(binary function)
@@ -90,40 +90,48 @@ $g: cal(Z)_4 times cal(Z)_4 arrow cal(Z)_4$에 해당하는 \
 관계(relation)를 `g`를 정의한다면 그 관계의 항수는 얼마일지 생각해 보고, \
 이 관계 `g`를 Prolog 술어(predicate)로 정의하여 두 개 이상의 쿼리를 작성해 보라.
 
-(1) `g`의 항수(arity)는? $quad$ 답: #uline(5em)
+(1) `g`의 항수(arity)는? $quad$ 답: 3
 
 (2) 관계 정의 코드와 쿼리를 아래에 작성하고 문서를 make로 빌드하여 실행 결과 확인.
 #code(file: "TC26hw01.pl")[```prolog
-% 여기에 g(...). 코드 작성
+%g 여기에 g(...). 코드 작성
+z4(0). z4(1). z4(2). z4(3).
+g(X, Y, Z) :- z4(X), z4(Y), Z is (X + Y) mod 4.
 
-?- true,                    % 이 줄의 true 대신 적절한 첫째 쿼리 작성
-   format('~w ~w!~n', ['1st','result']). % 적절한 형식으로 결과 출력
-?- true,                    % 이 줄의 true 대신 적절한 첫째 쿼리 작성
-   format('~w ~w!~n', ['2nd','result']). % 적절한 형식으로 결과 출력
+?- g(2, 3, Result), % 첫째 쿼리: 2와 3을 g 함수에 넣었을 때의 결과 Result 구하기
+   format('~w result: ~w!~n', ['1st', Result]). % 적절한 형식으로 결과 출력
+?- findall([X, Y], g(X, Y, 1), List), % 둘째 쿼리: 결과가 1이 되는 모든 [X, Y] 쌍을 List로 찾기 (findall 사용)
+   format('~w result: ~w!~n', ['2nd', List]). % 적절한 형식으로 결과 출력
 ```]
 
 #pagebreak()
-- 이름: 
-- 학번: 
+- 이름: 윤승재
+- 학번: 20232384
 #heading(level: 2, numbering: none)[주교재 Example 0.10]
 예제(Example)의 판별 함수(조건 함수, predicate, property)
 #mathit("beats")에 해당하는 \
 관계 `beats`를 정의한다면 그 관계의 항수는 얼마일지 생각해 보고, \ 
 마찬가지로 `beats`를 Prolog로 정의하여 두 개 이상의 쿼리를 작성해 보라.
 
-(1) `beats`의 항수(arity)는? $quad$ 답: #uline(5em)
+(1) `beats`의 항수(arity)는? $quad$ 답: 2
 
-(2) 관계 정의 코드와 쿼리를 아래에 작성하고 문서를 make로 빌드하여 실행 결과 확인.
+(2) 관계 정의 코드와 쿼리를 아래에 작성하고 문서를 make로 빌드
+
 #code(file: "TC26hw01.pl")[```prolog
 % 여기에 beats(...). 코드 작성
 % 단, Prolog에서 대문자는 변수로 취급되므로
 % scissors, paper, stone 이렇게 소문자로 코드에 작성할 것
 
-?- true,                    % 이 줄의 true 대신 적절한 첫째 쿼리 작성
-   format('~w ~w!~n', ['1st','result']). % 적절한 형식으로 결과 출력
-?- true,                    % 이 줄의 true 대신 적절한 첫째 쿼리 작성
-   format('~w ~w!~n', ['2nd','result']). % 적절한 형식으로 결과 출력
-```]
+beats(scissors, paper).
+beats(paper, stone).
+beats(stone, scissors).
+
+?- beats(Winner, paper), % 첫째 쿼리: paper를 이기는 Winner 찾기
+   format('~w result: ~w beats paper!~n', ['1st', Winner]). % 적절한 형식으로 결과 출력
+?- findall(Loser, beats(stone, Loser), List), % 둘째 쿼리: stone이 이기는 모든 Loser를 List로 찾기 (findall 사용)
+   format('~w result: stone beats ~w!~n', ['2nd', List]). % 적절한 형식으로 결과 출력
+```] 
+
 
 ///////////////////////////////////////////////////////////////////
 #set page(paper: "a4", flipped: true, margin: (x: 1.5cm, y: 1.2cm))
@@ -579,6 +587,19 @@ Labeled Graph 라벨된 그래프
 
 (형식)언어 langauge
 - (같은 알파벳을 기반으로 만든) 문자열의 집합
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
